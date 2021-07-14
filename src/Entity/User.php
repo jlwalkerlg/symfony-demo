@@ -3,46 +3,48 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="users")
  */
 class User
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
      */
-    private $id;
+    private Uuid $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     public function __construct(
+        Uuid $id,
         string $name,
         string $email,
         string $password
     ) {
+        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
     }
 
-    public function getId(): ?int
+    public function getId(): Uuid
     {
         return $this->id;
     }

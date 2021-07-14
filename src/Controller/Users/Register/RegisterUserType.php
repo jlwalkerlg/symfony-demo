@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegisterType extends AbstractType
+class RegisterUserType extends AbstractType
 {
     public function getBlockPrefix()
     {
@@ -24,7 +24,7 @@ class RegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => RegisterCommand::class,
+            'data_class' => RegisterUserCommand::class,
         ]);
     }
 }
