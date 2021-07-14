@@ -3,6 +3,8 @@
 namespace App\Controller\Users\Register;
 
 use App\Controller\BaseController;
+use App\Envelope\DataEnvelope;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +26,8 @@ class RegisterUserController extends BaseController
 
         $userId = $this->handler->handle($command);
 
-        return $this->json($userId, 201);
+        return $this->json(new DataEnvelope(
+            new RegisterUserResponse($userId)
+        ), 201);
     }
 }
