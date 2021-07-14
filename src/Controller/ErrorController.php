@@ -20,6 +20,7 @@ class ErrorController extends AbstractController
             );
         }
 
+        return $this->json(new ErrorEnvelope($exception->getMessage()), 500);
         return $this->json(new ErrorEnvelope('Internal server error.'), 500);
     }
 }

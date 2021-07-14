@@ -4,8 +4,7 @@ namespace App\Controller\Users\Register;
 
 use App\Controller\BaseController;
 use App\Envelope\DataEnvelope;
-use Exception;
-use Symfony\Component\HttpFoundation\Request;
+use App\Services\ParamConverters\FromBody;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,14 +15,9 @@ class RegisterUserController extends BaseController
     }
 
     #[Route('/users', name: 'register', methods: ["POST"])]
-    public function index(Request $request): Response
+    #[FromBody('command', RegisterUserType::class)]
+    public function index(RegisterUserCommand $command): Response
     {
-        $command = new RegisterUserCommand();
-        $form = $this->createForm(RegisterUserType::class, $command);
-        $form->handleRequest($request);
-
-        $this->validate($form);
-
         $userId = $this->handler->handle($command);
 
         return $this->json(new DataEnvelope(
