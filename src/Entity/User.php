@@ -23,7 +23,7 @@ class User
     private string $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private string $email;
 
@@ -32,16 +32,23 @@ class User
      */
     private string $password;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $age;
+
     public function __construct(
         Uuid $id,
         string $name,
         string $email,
-        string $password
+        string $password,
+        int $age
     ) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->age = $age;
     }
 
     public function getId(): Uuid
@@ -62,5 +69,10 @@ class User
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getAge(): int
+    {
+        return $this->age;
     }
 }

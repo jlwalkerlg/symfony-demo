@@ -3,19 +3,14 @@
 namespace App\Controller\Users\Register;
 
 use App\Controller\BaseController;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterUserController extends BaseController
 {
-    public function __construct(
-        private RegisterUserHandler $handler,
-        private LoggerInterface $logger,
-        private EntityManagerInterface $em
-    ) {
+    public function __construct(private RegisterUserHandler $handler)
+    {
     }
 
     #[Route('/users', name: 'register', methods: ["POST"])]
